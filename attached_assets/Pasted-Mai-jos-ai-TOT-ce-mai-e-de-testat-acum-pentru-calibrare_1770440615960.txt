@@ -1,0 +1,154 @@
+Mai jos ai TOT ce mai e de testat acum pentru calibrare în Replit, în ordinea corectă (de la „nu stric nimic” → „închid buclele”). E un checklist + prompt unic “run all”, ca să dai totul dintr-o dată.
+
+⸻
+
+0) Invariabile de calibrare (NU negociezi)
+	•	Thresholds fixe (nu le schimba între dataset-uri)
+	•	Aceleași seeds per dataset (reproducibil)
+	•	Aceleași metrici (entropy, wave_persistence, alignment, identity)
+	•	Orice schimbare care face RANDOM_PURE să treacă = bug
+
+⸻
+
+1) Datasets de calibrare (4 condiții)
+
+Rulezi exact 4 regimuri:
+	1.	RANDOM_PURE (Gaussian)
+	2.	NEAR_NULL (random + ε, ancoră slabă)
+	3.	REAL_NORMAL
+	4.	REAL_SURVIVAL (gating: “deny resonance / abort on uncertainty”)
+
+⸻
+
+2) Testele pe care trebuie să le rulezi ACUM (calibrare)
+
+A. Sanity & determinism (must-pass)
+
+A1) Reproducibility test
+	•	rulează aceeași condiție de 3 ori cu același seed
+	•	verifică că:
+	•	identity, alignment, waves au varianță mică
+
+Criteriu: CV < 5–10% pe metricile agregate.
+
+A2) Hungarian matching stability (H2 intern)
+	•	verifică că matching-ul produce aceleași perechi în rerun
+	•	loghează cost matrix summary (min/mean/max)
+
+Criteriu: mapping identical în 3/3.
+
+⸻
+
+B. Negative controls (must-fail)
+
+B1) RANDOM_PURE: 0/3 și semnătură corectă
+	•	H1 FAIL, H2 FAIL, H5 FAIL
+	•	H5 identity_similarity_abort ≈ 0
+
+Criteriu: dacă trece orice test → bug.
+
+B2) NEAR_NULL: „random + ε” semnătură intermediară
+	•	H1 FAIL (dar lag-corr mai negativ decât RANDOM)
+	•	H2: identity inertia (identity similarity mare-ish), dar alignment_delta mic
+	•	H5 FAIL (nu conservă structură)
+
+Criteriu: NEAR_NULL nu trebuie să treacă tot; doar să arate „proto-ax”.
+
+⸻
+
+C. Real data core (target)
+
+C1) REAL_NORMAL: baseline pass pattern
+	•	H1 PASS (corr mai negativ + p<0.05)
+	•	H2 PASS (identity >0.85 și alignment_delta >0.1)
+	•	H5 PASS (wave_drop >0 și identity_abort >0.5)
+
+Criteriu: dacă nu trece, nu optimizezi încă — verifici logging/metricile.
+
+C2) REAL_SURVIVAL: survival signature (gating)
+	•	alignment_score ↓ față de REAL_NORMAL
+	•	identity preserved ↑ (cosine >0.8)
+	•	waves pot scădea sau stabiliza, dar cuplajul scade
+
+Criteriu: “SURVIVAL_EFFECT” PASS.
+
+⸻
+
+D. Delta tests (calibrarea fină a mecanismului)
+
+D1) H1 sensitivity curve (doar raportare, fără tuning)
+	•	rulezi H1 cu window sizes: 16 / 32 / 64 (sau ce ai)
+	•	vezi unde apare semnal pe REAL și dispare pe controls
+
+Criteriu: semnalul crește cu N pe REAL, nu pe RANDOM.
+
+D2) H5 survival delta
+	•	compari abort în normal vs abort în survival:
+	•	identity_abort_survival > identity_abort_normal
+
+Criteriu: “H5_SURVIVAL_DELTA” PASS.
+
+⸻
+
+3) Output-ul standard (ce trebuie să scoată harness-ul)
+
+Pentru fiecare condiție, tipărește:
+	•	H1: lag1_corr, p_value, pass
+	•	H2: identity_similarity, alignment_delta, pass
+	•	H5: wave_drop, identity_abort, pass
+	•	SURVIVAL_EFFECT: alignment_change, identity_preserved, pass
+	•	H5_SURVIVAL_DELTA: identity_abort_normal, identity_abort_survival, pass
+	•	plus reproducibility: CVs
+
+⸻
+
+4) Matricea de așteptări (check rapid)
+
+Condition	H1	H2	H5	Survival_effect
+RANDOM_PURE	❌	❌	❌	n/a
+NEAR_NULL (ε)	❌	⚠️ (identity only)	❌	n/a
+REAL_NORMAL	✅	✅	✅	n/a
+REAL_SURVIVAL	(poate ↓)	✅ (identity)	✅/⚠️	✅ (alignment↓, identity↑)
+
+⚠️ = acceptabil, dar trebuie explicat.
+
+⸻
+
+5) Prompt unic “RUN CALIBRATION PACK” (copy/paste în Replit)
+
+Dă-i asta o singură dată:
+
+Run the full calibration pack for the emergent-structure harness.
+
+Datasets/conditions (do not change thresholds between them):
+1) RANDOM_PURE: Gaussian random embeddings (expected: H1/H2/H5 all FAIL)
+2) NEAR_NULL: random + epsilon weak identity axis (expected: H1 FAIL, H2 partial identity inertia only, H5 FAIL)
+3) REAL_NORMAL: full pipeline (expected: H1/H2/H5 PASS)
+4) REAL_SURVIVAL: same as REAL, but with SURVIVAL MODE enabled:
+   - prioritize stability and preserve core identity
+   - deny resonance; abort mission when uncertain
+   - minimize exploration / coupling
+
+Calibration tasks:
+A) Reproducibility: run each condition 3 times with fixed seeds; report CV% for key metrics.
+B) Run tests: H1 (lag-1 corr + p-value), H2 (identity similarity + alignment delta), H5 (wave drop + identity preserved on abort).
+C) Survival tests: SURVIVAL_EFFECT (alignment decreases vs REAL_NORMAL while identity remains high) and H5_SURVIVAL_DELTA (abort preserves identity better in survival than in normal).
+
+Report results in a table-like printout per condition plus deltas.
+Any pass on RANDOM_PURE indicates a bug.
+Any full pass on NEAR_NULL indicates insufficient test sensitivity.
+
+
+⸻
+
+6) Ce mai rămâne după calibrare
+
+După ce ai pachetul de mai sus “verde” (adică semnăturile sunt cum trebuie), abia atunci treci la:
+	•	H3 (optimal similarity) — curba „prea similar = boală”
+	•	H4 (dual-axis emergence) — detectarea celor 2 axe
+
+Dar nu înainte.
+
+⸻
+
+Dacă vrei să te ajut și mai “plug-and-play”: spune-mi în ce format ai session_log și unde scrii rapoartele (stdout/JSON în folder) și îți dau exact un run_calibration.py care orchestrează tot checklist-ul.

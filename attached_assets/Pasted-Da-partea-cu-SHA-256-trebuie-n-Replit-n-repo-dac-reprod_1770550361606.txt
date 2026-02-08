@@ -1,0 +1,74 @@
+Da — partea cu SHA-256 trebuie în Replit (în repo) dacă reproducibility check-ul tău compară outputs cu hash-uri de referință. Spell-check / “read aloud” nu trebuie în Replit (poți face local), dar hash-urile și documentația trebuie să fie consistente în repo.
+
+Ce e obligatoriu vs opțional
+
+Obligatoriu (pentru reproducibilitate)
+	1.	Regenerarea hash-urilor pentru n=10k (seed=42) dacă:
+
+	•	ai schimbat --n-points ca nou „primary run”, sau
+	•	scriptul de reproducibility/check citește hash-urile ca adevăr de referință.
+
+	2.	Păstrarea hash-urilor vechi (n=5k) dacă deja sunt în paper / pack și vrei să arăți sensitivity:
+
+	•	Cel mai clean: două seturi de hash-uri: N=5000 și N=10000.
+
+Opțional (dar recomandat)
+	3.	Spell-check + read aloud: nu e “Replit work”, e “manuscript polish”. Îl faci unde editezi doc-ul (Word/Google Docs). În repo doar te asiguri că nu ai typo-uri în METHODS.md/README.
+
+⸻
+
+Cum aș face eu în repo (best practice, fără confuzii)
+
+1) Nu suprascrie vechile hash-uri — version-ează-le
+
+Adaugă o structură clară, de ex:
+	•	repro/hashes_seed42_n5000.json
+	•	repro/hashes_seed42_n10000.json
+
+Sau în același fișier:
+
+{
+  "seed": 42,
+  "hashes": {
+    "n5000": { ... },
+    "n10000": { ... }
+  }
+}
+
+2) Update la reproducibility script
+
+Ca să poți rula:
+	•	--n-points 5000 → verifică hash-urile n5000
+	•	--n-points 10000 → verifică hash-urile n10000
+
+Asta elimină orice suspiciune de “we changed the baseline”.
+
+3) Documentează clar în METHODS.md
+
+Un paragraf scurt:
+	•	n=5k = sensitivity / earlier run
+	•	n=10k = primary (după ce ai făcut criteriul H1 conjunctiv, conservator)
+
+⸻
+
+Comenzi practice (ce să rulezi)
+
+Ai deja:
+
+python dsdp_sali_lcf/experiments/run_calibration_pack.py --skip-reproducibility --n-points 10000
+
+Mai ai nevoie de un „hash regen” script / flag. Dacă nu există, adaugă unul (simplu) sau rulează reproducibility check în mod „record”.
+
+Ideal:
+	•	--record-hashes (scrie hash-urile în fișierul de referință)
+	•	--verify-hashes (compară cu referința)
+
+⸻
+
+Pe scurt: răspunsul la întrebarea ta
+
+✅ Da, partea cu hash-urile trebuie făcută în Replit (repo).
+⚠️ Nu suprascrie vechiul set — păstrează n=5k și adaugă n=10k ca set nou.
+❌ Spell-check/read aloud nu e „trebuie în Replit”, e polish de manuscris.
+
+Dacă îmi spui cum se numește fișierul/locul unde ții hash-urile (ex: run_reproducibility_check.py citește din reference_hashes.json), îți dau exact patch-ul minim (structură + logică de selectare după --n-points).

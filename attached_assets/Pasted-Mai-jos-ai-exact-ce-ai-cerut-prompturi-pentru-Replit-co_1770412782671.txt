@@ -1,0 +1,182 @@
+Mai jos ai exact ce ai cerut: prompturi pentru Replit (copy-paste), în 2 faze:
+	•	Iterația 1 (Calibration / sanity): face setup robust, verifică formatele, rezolvă “t mapat strâmb”, definește fallback-uri, rulează un smoke test pe subset mic, verifică că nullurile și ablațiile produc comportament sănătos (altfel crăpă).
+	•	Iterația 2 (Run prompt): rulează full pipeline pe cele două fișiere (fresh/echo), produce outputs + verdict.
+
+Am inclus și “intuiția” pe care trebuie s-o spună Replit-ului: nu căutăm morphic field; căutăm structură latentă persistentă; echo < fresh e bine; kill-switch dacă un singur null trece.
+
+⸻
+
+Prompt 1 — Replit Iterația 1 (Calibration / No-Error Pass)
+
+You are implementing a scientific, null-first pipeline in Python (no mysticism). 
+Goal: build a robust calibration pass that ensures the later full run will not error.
+
+Project name: dsdp_sali_lcf
+
+Data: embeddings vectors. Two separate files: FRESH and ECHO. Each file contains an array E of shape (n, d).
+User note: n and d are large/irregular ("approx 6x8", possibly meaning big like ~6e8 is unrealistic). 
+So you MUST implement streaming-friendly code paths and a small-sample calibration mode.
+
+CRITICAL SCIENTIFIC INTENT
+- We are NOT proving any morphic field.
+- We are operationalizing "latent structure emergence" with conservative null models, ablations, perturbations, and kill-switches.
+- Echo < Fresh and ratio < 1 is a HEALTHY anti-contamination outcome.
+- Kill-switch: if a claimed effect appears only under one null, it FAILS.
+
+CALIBRATION TASKS (do these in order):
+1) Create a minimal working repo structure with src/ and scripts/ as specified below.
+2) Implement robust data loaders for .npz/.npy/.csv. Support two separate files (fresh, echo).
+3) Implement a calibration mode that:
+   - loads ONLY a subset of points (e.g., first N=50k or random sample if file huge)
+   - validates shape, dtype, NaNs, infinities
+   - centers/normalizes embeddings (optional but must be consistent)
+   - handles missing time index t gracefully:
+       * if 't' exists: use it
+       * else: create t = arange(n)
+       * also support "t mapping is skewed": implement option to re-map t by sorting on a scalar proxy (e.g., projection on anchor axis) and store both orders for later diagnostics.
+4) Implement the geometry stage in a safe way:
+   - choose anchor pair by approximate farthest-pair (use random projections / sampling, do NOT do O(n^2))
+   - hub = midpoint
+   - compute unit direction vectors u = normalize(E - hub)
+   - compute 6 magistrales using spherical k-means (cosine distance). If k-means fails, fallback to PCA-based binning into 6 directional sectors.
+5) Implement lattice scoring in log-space:
+   - y = log(r+eps)
+   - seed grid A step = log(sqrt(phi)), grid B step = log(phi)
+   - coupler switch threshold = log(2.25), switching penalty lambda fixed
+   - tolerance tau in log_abs, pre-registered default tau=0.03
+   - produce per-magistral alignment_rate, median_resid, switch_rate, and global score
+6) Implement temporal outputs (calibration version):
+   - build S(t) as global lattice score per chunk or per batch (if no real iteration exists, use pseudo-time bins)
+   - compute wave persistence: open waves and longest wave above a fixed-quantile threshold
+   - compute preliminary Field Strength Index (FSI) as normalized weighted combination of:
+       signal rate, surprise correlation (z vs surrogates), clustering (entropy)
+7) Implement null generators in calibration:
+   - uniform null in y (match range)
+   - covariance-preserving Gaussian null (match mean, cov)
+   - spacing-preserving null (permute delta y per magistral)
+   - run B=50 surrogates only for calibration (small), ensure runtime OK
+   - compute conservative p = max over nulls
+8) Implement ablation stubs (calibration):
+   - seed ablation: replace sqrt(phi) with decoys [1.70, 2.10, 2.60] and verify score drops
+   - coupler ablation: disable coupler and see if effect changes
+   - anchor ablation: random anchor pair and verify stability breaks
+9) Produce a calibration report:
+   - print a concise summary to console
+   - save JSON with diagnostics and any warnings
+   - save a few plots (PCA scatter colored by magistral; residual histogram; wave length histogram)
+
+ENGINEERING REQUIREMENTS
+- Use only numpy/scipy/sklearn/matplotlib (and pyyaml if config).
+- Write clean functions, docstrings, type hints.
+- Make everything deterministic with a random seed in config.
+- Be defensive: catch exceptions and fall back to simpler methods rather than crashing.
+- DO NOT hardcode file paths; accept CLI args and config.
+
+OUTPUTS
+- A working calibration run must complete without errors on the subset and produce outputs/ calib JSON+plots.
+- If anything is ambiguous, pick the most conservative assumption and log it.
+
+After completing calibration mode, provide:
+- the repo file tree
+- the CLI command(s) to run calibration on fresh and echo files
+- what files to edit to set real paths for the full run
+
+
+⸻
+
+Prompt 2 — Replit Iterația 2 (Full Run Prompt)
+
+Now implement the full pipeline run using the already-built calibration codebase.
+
+INPUTS
+- Two files: fresh embeddings and echo embeddings (same format).
+- If a time index 't' exists, use it. If not, use pseudo-time bins but clearly mark this in report.
+- Use the same anchor/magistrales logic for both datasets, but also compute per-dataset anchors as a diagnostic.
+
+PIPELINE (FULL)
+1) Run geometry + lattice + temporal modules for BOTH datasets:
+   - shaft (anchor pair), hub
+   - 6 magistrales
+   - log-space lattice with seed sqrt(phi) and optional phi grid
+   - coupler 2.25 switch
+2) Primary endpoint: Predict next band (E6)
+   - per magistral: estimate band centers by k (and A/B labels)
+   - predict next band center in y and evaluate on held-out last band
+   - aggregate median error across magistrales
+3) Null suite (B=500) for the PRIMARY endpoint:
+   - uniform, covariance-preserving, spacing-preserving
+   - compute conservative p = max across nulls
+4) Multiple testing:
+   - Holm correction over:
+     * primary endpoint tests (fresh, echo) and optional decoy seeds if included
+     * keep primary as primary; secondary reported but not used to rescue
+5) Ablations (must run and be reported):
+   - seed ablation with decoys
+   - coupler off
+   - anchor random
+   - order/index ablation for temporal (shuffle t)
+6) Perturbation curve:
+   - alphas = [0.0,...,1.0] as configured
+   - mixing spacing null + small random rotations
+   - compute primary endpoint vs alpha
+   - compute tipping point via piecewise-linear ΔBIC
+7) Echo vs Fresh:
+   - compute resonance ratio for primary endpoint and for FSI
+   - Interpret ratio < 1 as "anti-contamination / no trivial transfer"
+   - If ratio > 1, flag possible leakage; do NOT call it a win
+8) Verdict logic (STRICT):
+   - Claim "structure detected" only if:
+       a) primary endpoint beats ALL nulls (p = max across nulls) and survives Holm
+       b) ablations reduce effect toward null (seed/coupler/anchors)
+       c) effect stable under split-half (n_splits=20)
+   - Kill-switch:
+       - if significant only under one null: FAIL
+       - if seed ablation does not reduce effect: FAIL
+       - if coupler removal does not change anything but coupler was claimed essential: report as negative for coupler
+9) Outputs:
+   - write JSON summaries for fresh and echo, plus a combined report.json
+   - write plots:
+       * PCA magistrales scatter
+       * residual hist
+       * band centers + predictions
+       * wave lengths
+       * FSI breakdown
+       * echo vs fresh comparison
+       * p-values per null
+       * perturb curve with tipping alpha*
+
+ENGINEERING
+- Must handle large n by sampling / chunking:
+   - allow 'max_points' config; default None uses all if feasible
+   - otherwise sample uniformly at random with a fixed seed
+- Ensure runtime is reasonable and memory safe.
+- Log all key decisions and warnings.
+
+Finally, print a concise “paper-ready” results block:
+- Primary endpoint effect size and p-values (per null and conservative)
+- Holm-adjusted decision
+- Key ablation outcomes
+- Echo vs Fresh ratios
+- One-sentence verdict consistent with kill-switch rules
+
+
+⸻
+
+Prompt 0 (scurt) — “Intuiția” pe care să o bage în README (ca să nu uite scopul)
+
+(Dacă vrei să fie lipit în topul repo-ului.)
+
+This project operationalizes "morphic" as latent structure detectability, not as an ontological field.
+We quantify persistence (temporal waves), coherence (FSI), and predictive discrete structure (next-band prediction),
+and validate strictly via conservative nulls, ablations, perturbations, and kill-switch rules.
+Echo<Fresh is considered a healthy anti-contamination outcome, not evidence for non-local transfer.
+
+
+⸻
+
+Mică notă despre ce mi-ai spus (ca să nu crape)
+	•	“n ireal” ⇒ în prompt am cerut explicit subset mode + sampling + no O(n^2).
+	•	“t mapat strâmb” ⇒ în calibrare am cerut opțiune de remap t și pseudo-time bins.
+	•	“două fișiere separate” ⇒ pipeline dublu și comparație Echo/Fresh.
+
+Dacă vrei să fie și mai “zero-error”, spune-mi doar formatul real al celor două fișiere (npz/npy/csv) și cheile din npz (dacă există). În rest, prompturile de mai sus sunt suficient de defensive ca Replit să nu se blocheze.

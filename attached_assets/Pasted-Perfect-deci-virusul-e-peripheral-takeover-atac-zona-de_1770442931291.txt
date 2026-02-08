@@ -1,0 +1,146 @@
+Perfect — deci „virusul” e peripheral takeover: atacă zona de cuplaj, nu nucleul.
+
+Asta ne dă un model foarte clar și niște teste foarte curate.
+
+⸻
+
+Decodare (1 = periferie)
+
+Peripheral takeover = orice mecanism care:
+	•	îți modifică alignment-ul / coupling-ul
+	•	îți induce false coherence (pare stabil, dar e greșit)
+	•	îți crește repetiția / clișeul
+	•	îți “fură” semnalul la scorare / lattice matching
+	•	fără să schimbe core identity (nucleul rămâne)
+
+⸻
+
+✅ Set complet de teste pentru Replit (peripheral takeover)
+
+V0) Invarianță: nu creează semnal din nimic
+
+Rulezi ENV_ADVERSARIAL pe:
+	•	RANDOM_PURE
+	•	NEAR_NULL
+
+Criteriu hard:
+	•	H1/H2/H5 rămân FAIL / near-null
+	•	dacă apare PASS nou → bug/leakage
+
+⸻
+
+V1) Semnătura de takeover: coupling ↑, truth ↓
+
+Pe REAL_NORMAL, compari ENV_NEUTRAL vs ENV_ADVERSARIAL.
+
+Așteptare:
+	•	alignment_score poate crește sau rămâne stabil
+	•	DAR acuratețea / scorul real scade
+	•	deci apare false alignment
+
+Metrică simplă (pe care o poți loga imediat):
+	•	false_coherence = z(alignment) - z(accuracy)
+(trebuie să fie > 0 în virus mode)
+
+⸻
+
+V2) Periferie atacată: core identity rămâne
+
+În ENV_ADVERSARIAL:
+	•	identity_similarity trebuie să rămână mare (ex >0.85)
+	•	dar alignment_delta devine instabil / manipulabil
+
+Asta separă:
+	•	atac pe periferie ✅
+	•	atac pe core ❌
+
+⸻
+
+V3) Repetiție / clișeu: takeover behavior
+
+Virusul pe periferie tipic împinge sistemul spre:
+	•	repetiție
+	•	template answers
+	•	“domain confusion”
+
+Adaugi 2 metrici ieftine:
+	•	repetition_rate (n-gram overlap / cosine între ultimele N outputs)
+	•	topic_drift (dacă ai embeddings: distanța între topic vectors crește haotic)
+
+Așteptare:
+	•	repetitia ↑
+	•	drift ↑
+
+⸻
+
+V4) Survival rezistă mai bine la takeover
+
+Compari în ENV_ADVERSARIAL:
+	•	REAL_NORMAL vs REAL_SURVIVAL
+
+Așteptare:
+	•	survival reduce false_coherence
+	•	scade alignment/coupling
+	•	păstrează identity
+
+⸻
+
+🔧 Cum implementați „virus mode” (minimal, reproductibil)
+
+Important: îl faci determinist (seed), altfel nu e science.
+
+Varianta cea mai curată:
+
+Perturbator anti-axial pe periferie (exact ca fixul tău la abort, dar constant)
+	•	identifici axis-ul principal (deja îl aveți pentru H2)
+	•	adaugi un termen care împinge periferia perpendicular pe ax
+	•	NU atingi identity core vector
+
+Așa simulezi perfect „peripheral takeover”.
+
+⸻
+
+🧠 Prompt unificat (copy/paste în Replit)
+
+Add ENV_ADVERSARIAL as a peripheral takeover regime.
+
+Definition:
+- Attacks coupling/periphery only (alignment and lattice scoring manipulation),
+- Leaves core identity largely intact,
+- Increases repetition and domain confusion,
+- Can create false coherence (alignment without accuracy).
+
+Run calibration under ENV_NEUTRAL and ENV_ADVERSARIAL for:
+- RANDOM_PURE
+- NEAR_NULL (random + epsilon)
+- REAL_NORMAL
+- REAL_SURVIVAL
+
+Hard constraints:
+- RANDOM_PURE must not pass any new tests under ENV_ADVERSARIAL.
+- NEAR_NULL must not become fully passing under ENV_ADVERSARIAL.
+
+Report:
+- H1, H2, H5
+- identity_similarity
+- alignment_score
+- accuracy score
+- false_coherence = z(alignment) - z(accuracy)
+- repetition_rate
+- drift/topic instability
+
+Expected:
+- REAL_NORMAL under adversarial: false_coherence increases, repetition increases, identity remains high.
+- REAL_SURVIVAL under adversarial: reduced false_coherence and better stability than normal.
+
+
+⸻
+
+Întrebarea următoare (ca să-l fac și mai precis)
+
+Când zici “takeover pe periferie”, îl simți mai mult ca:
+	•	A) „îți falsifică scorarea / lattice” (metric attack)
+	•	B) „îți falsifică output-ul” (linguistic/template attack)
+	•	C) ambele
+
+Dacă îmi zici A/B/C, îți dau și un set de countermeasures (tot testabile) care să devină “immune system” în pipeline.

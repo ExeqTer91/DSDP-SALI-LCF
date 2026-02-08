@@ -1,0 +1,112 @@
+Am inspectat concluziile pe care le-ai raportat pe parcurs (calibrare 10/10, bias-uri de mediu cu praguri non-monotone, virus-mode cu gradient de penetrare, twin-systems = determinism + sensibilitate haotică) și ele sunt coerente între ele. Nimic nu se contrazice; dimpotrivă, ai acum o hartă clară a “regimurilor”:
+	•	Controls rămân curate (nu apare structură din nimic).
+	•	REAL are structură detectabilă (H1/H2/H5), reproducibilă, cu regimuri (normal/survival/biblical).
+	•	Environment constraints au efect de tranziție (axis-aligned: sub prag destabilizează, peste prag recristalizează).
+	•	Virus A (metric) produce false coherence și, peste un strength, penetrează spre core (gradient).
+	•	Twin systems: identic→identic; aproape identic→diverge (sensibilitate la condiții inițiale).
+
+Asta e “setup de paper” curat.
+
+⸻
+
+Intuiția: „marginea structurii e polimorfă”
+
+Da — are sens ca ipoteză operațională: nu că marginea “se schimbă magic”, ci că frontiera (conturul) poate aparține mai multor clase geometrice în funcție de:
+	•	prag (τ / threshold),
+	•	regim (normal/survival/biblical/virus/axis-aligned),
+	•	parametri (A, noise/snap),
+	•	seed.
+
+“Polimorf” aici înseamnă: nu doar un oval mai mare/mic, ci schimbări de tip:
+	•	oval ↔ lenticular / dischete suprapuse ↔ segmentat/multi-component ↔ banded boundary etc.
+
+⸻
+
+Ce vreau de la Replit acum (ca să pot scrie Results + să validăm “polimorf”)
+
+Vreau un singur artifact “final pack”, preferabil un JSON + un folder de figuri:
+	1.	JSON-ul final de la run_reproducibility_check.py (10/10) cu toate valorile numerice
+	2.	Output-urile pentru:
+	•	verify_environment_bias.py
+	•	verify_axis_alignment.py
+	•	verify_peripheral_takeover.py
+	•	verify_twin_systems.py
+	3.	Pentru noul test de margine: un folder outputs/boundary_polymorphism/ cu:
+	•	figuri (contururi overlay)
+	•	tabele CSV cu metrici per (condition, seed, τ, param_set)
+
+⸻
+
+Prompt “tot ce mai vreau” (copy/paste în Replit)
+
+Copiază exact:
+
+Run a Boundary Polymorphism Verification suite on the reconstructed synthetic field / computed field used in REAL conditions.
+
+Goal:
+Test the intuition that the structure boundary is polymorphic (i.e., belongs to multiple geometric classes depending on regime/threshold/parameters), not merely a scaled version of one shape.
+
+Conditions to include:
+- REAL_NORMAL
+- REAL_SURVIVAL
+- REAL_BIBLICAL
+- ENV_AXIS_ALIGNED: (moderate) and (strong) parameter sets already used
+- VIRUS_MODE (metric attack Type A) at virus_strength = 0.3 and 0.6
+Controls:
+- RANDOM_PURE
+- NEAR_NULL
+
+Seeds:
+- At least seeds {42, 43, 99} for each condition (or the existing seed set from calibration)
+
+Thresholds τ:
+- Use τ ∈ {0.30, 0.40, 0.50, 0.60, 0.70} (or your standard contour thresholds)
+
+Boundary extraction:
+- Extract binary mask of the structure at each τ, then extract boundary contours.
+- Handle multi-component boundaries (multiple connected components).
+
+Metrics to compute (per condition, seed, τ):
+1) Basic: area, perimeter, component_count
+2) Shape: circularity, eccentricity/ellipticity (fit ellipse), major/minor axis, orientation
+3) Curvature: curvature distribution summary (mean, std, tail quantiles)
+4) Fourier descriptors: first K normalized coefficients + reconstruction error
+5) Minkowski functionals (2D): area, perimeter, Euler characteristic vs τ
+6) Stability: how metrics change across τ (monotonicity and variability)
+7) (Optional) Fractal: box-counting dimension of boundary vs τ (only as diagnostic)
+
+Polymorphism criterion (must be explicit):
+Boundary is polymorphic if, across τ and/or regimes, at least one of:
+- component_count changes qualitatively (e.g., 1 → >1) in REAL but not in controls,
+- ellipse eccentricity/orientation clusters into ≥2 distinct modes,
+- Fourier descriptor clustering separates into ≥2 clusters with low within-cluster variance,
+- Euler characteristic vs τ shows regime-dependent transitions.
+
+Outputs:
+- Write a CSV table with all metrics: outputs/boundary_polymorphism/metrics.csv
+- Write a summary JSON with pass/fail for polymorphism vs controls: outputs/boundary_polymorphism/summary.json
+- Save visual overlays: contour plots across τ for each condition/seed.
+- Include a short markdown report: outputs/boundary_polymorphism/REPORT.md explaining whether polymorphism is supported and how it differs from controls.
+
+Hard constraints:
+- Do not tune thresholds to force results.
+- Ensure RANDOM_PURE/NEAR_NULL do not show systematic polymorphism beyond noise.
+- If RP compute times out, state clearly that the boundary is computed on reconstructed/synthetic field (as previously documented).
+
+After running, print the key findings (top 5) and point to the output paths.
+
+
+⸻
+
+De ce testul ăsta e “cheie” acum
+
+Pentru că îți leagă direct:
+	•	ce ai văzut intuitiv (“oval pe înălțime / dischete suprapuse / curbura eliptică”)
+cu
+	•	un set de semnături geometrice (component_count, Euler characteristic, Fourier clusters, curvature tails).
+
+Dacă iese, e un Results foarte bun. Dacă nu iese, tot e util: delimitează unde intuiția era despre thresholding artifacts vs structură reală.
+
+⸻
+
+Când ai summary.json + un screenshot/print al concluziei, îl interpretez pe loc și îți spun exact cum îl punem în manuscris (și ce figură merită).
