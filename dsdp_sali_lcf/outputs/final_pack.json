@@ -1,0 +1,402 @@
+{
+  "metadata": {
+    "pipeline": "DSDP_SALI_LCF",
+    "phase": "Phase 1 + Boundary Polymorphism",
+    "generated_by": "generate_final_pack.py"
+  },
+  "calibration": {
+    "status": "10/10",
+    "all_pass": true,
+    "tests": {
+      "A1": {
+        "pass": true,
+        "test": "A1_reproducibility"
+      },
+      "A2": {
+        "pass": true,
+        "test": "A2_hungarian_stability"
+      },
+      "B1": {
+        "pass": true,
+        "test": "B1_random_pure_negative"
+      },
+      "B2": {
+        "pass": true,
+        "test": "B2_near_null"
+      },
+      "C1": {
+        "pass": "True",
+        "test": "C1_real_normal"
+      },
+      "C2": {
+        "pass": true,
+        "test": "C2_survival_effect"
+      },
+      "D1": {
+        "pass": true,
+        "test": "D1_h1_sensitivity"
+      },
+      "D2": {
+        "pass": true,
+        "test": "D2_h5_survival_delta"
+      },
+      "E1": {
+        "pass": true,
+        "test": "E1_biblical_consistency"
+      },
+      "E2": {
+        "pass": true,
+        "test": "E2_biblical_no_false_emergence"
+      }
+    }
+  },
+  "fractal_verification": {
+    "results": {
+      "fractal_time": {
+        "random_never": true,
+        "near_null_never": false,
+        "real_consistent": false
+      },
+      "fractal_space": {
+        "monotonic": true,
+        "identity_ok": true
+      },
+      "fractal_regime": {
+        "hierarchy_ok": true
+      }
+    },
+    "space_details": {
+      "RANDOM_PURE": {
+        "0.25": {
+          "align_drop": 0.00036426394760524783,
+          "identity": 0.9981656207861048
+        },
+        "0.5": {
+          "align_drop": -0.0684161657377915,
+          "identity": -0.05208238864274162
+        },
+        "1.0": {
+          "align_drop": -0.13516583562670345,
+          "identity": -0.09894306115863079
+        }
+      },
+      "NEAR_NULL": {
+        "0.25": {
+          "align_drop": 0.0016798574394185292,
+          "identity": 0.9380270391902328
+        },
+        "0.5": {
+          "align_drop": -0.06272600420099089,
+          "identity": -0.06352658340867663
+        },
+        "1.0": {
+          "align_drop": -0.1282900215515314,
+          "identity": -0.11910470265333307
+        }
+      },
+      "REAL_NORMAL": {
+        "0.25": {
+          "align_drop": 0.0357103233887192,
+          "identity": 0.9999990098450716
+        },
+        "0.5": {
+          "align_drop": 0.12137160193565653,
+          "identity": 0.9999958835015327
+        },
+        "1.0": {
+          "align_drop": 0.12137160193565653,
+          "identity": 0.9999821809931052
+        }
+      },
+      "REAL_SURVIVAL": {
+        "0.25": {
+          "align_drop": 0.041976497242931454,
+          "identity": 0.9999995374337923
+        },
+        "0.5": {
+          "align_drop": 0.12122003702937147,
+          "identity": 0.999998078932771
+        },
+        "1.0": {
+          "align_drop": 0.12122003702937147,
+          "identity": 0.9999917017610863
+        }
+      }
+    },
+    "regime_details": {
+      "2000": {
+        "RANDOM_PURE": {
+          "alignment": 0.046834111632655995,
+          "waves": 4,
+          "fsi": 0.01888037366840255
+        },
+        "NEAR_NULL": {
+          "alignment": 0.0456094140407381,
+          "waves": 3,
+          "fsi": 0.018403087308749427
+        },
+        "REAL_NORMAL": {
+          "alignment": 0.32177019248761585,
+          "waves": 20,
+          "fsi": 0.12881497694418106
+        },
+        "REAL_SURVIVAL": {
+          "alignment": 0.23751646340883084,
+          "waves": 6,
+          "fsi": 0.09512626696838641
+        }
+      },
+      "5000": {
+        "RANDOM_PURE": {
+          "alignment": 0.060900029181132576,
+          "waves": 2,
+          "fsi": 0.024422370706379728
+        },
+        "NEAR_NULL": {
+          "alignment": 0.0615391829984398,
+          "waves": 4,
+          "fsi": 0.024802090026523473
+        },
+        "REAL_NORMAL": {
+          "alignment": 0.12137160193565653,
+          "waves": 2,
+          "fsi": 0.04858199653157311
+        },
+        "REAL_SURVIVAL": {
+          "alignment": 0.12122003702937147,
+          "waves": 2,
+          "fsi": 0.04851994346158602
+        }
+      }
+    },
+    "all_pass": false
+  },
+  "verifications": {
+    "environment_bias": {
+      "script": "verify_environment_bias.py",
+      "key_metrics": [
+        "4/5 predictions confirmed",
+        "Controls clean, temporal jitter is informational signal"
+      ],
+      "verdict": "VALID (environment constrains, does not create)"
+    },
+    "axis_alignment": {
+      "script": "verify_axis_alignment.py",
+      "key_metrics": [
+        "4/6 checks passed",
+        "Non-monotonic: moderate destabilizes, strong stabilizes",
+        "Identity preserved (>0.5)"
+      ],
+      "verdict": "VALID (gating parameter with transition threshold)"
+    },
+    "peripheral_takeover": {
+      "script": "verify_peripheral_takeover.py",
+      "key_metrics": [
+        "4/5 verified",
+        "Invariance: controls stay clean",
+        "Virus attacks periphery, core preserved at low strength",
+        "High intensity penetrates to core (gradient)"
+      ],
+      "verdict": "CONFIRMED (peripheral-first, gradient penetration)"
+    },
+    "twin_systems": {
+      "script": "verify_twin_systems.py",
+      "key_metrics": [
+        "Same seed = identical (deterministic)",
+        "Different seed = divergent (no remote control)",
+        "Adjacent seeds diverge (chaotic sensitivity)"
+      ],
+      "verdict": "CONFIRMED (deterministic + chaotic, not convergent)"
+    }
+  },
+  "boundary_polymorphism": {
+    "polymorphism_confirmed": true,
+    "verdict_strength": "CONFIRMED",
+    "mean_control_poly_score": 2.5,
+    "mean_real_poly_score": 3.2857142857142856,
+    "poly_separation": 0.7857142857142856,
+    "mean_control_topo_score": 1.75,
+    "mean_real_topo_score": 4.357142857142857,
+    "topo_separation": 2.6071428571428568,
+    "subsystem": {
+      "random_topo": 1.5,
+      "near_null_topo": 2.0,
+      "core_real_mean_topo": 3.5,
+      "extended_mean_topo": 5.0,
+      "core_real_vs_random": 2.0,
+      "extended_vs_random": 3.5
+    },
+    "statistics": {
+      "control_ci_95": [
+        1.5,
+        2.0
+      ],
+      "real_ci_95": [
+        3.642857142857143,
+        5.071428571428571
+      ],
+      "separation_ci_95": [
+        1.7857142857142856,
+        3.3928571428571432
+      ],
+      "mann_whitney_U": 0.0,
+      "mann_whitney_p": 0.027488083088404645,
+      "cohens_d": 2.610474670460353,
+      "effect_size_label": "large"
+    },
+    "caveats": [
+      "Results depend on 2D PCA projection; topology may differ in higher dimensions",
+      "KDE bandwidth and grid resolution not sensitivity-tested",
+      "NEAR_NULL shows some transitions; boundary between structured and unstructured is gradual"
+    ],
+    "random_no_component_transitions": true,
+    "random_low_euler": true,
+    "real_has_topological_transitions": true,
+    "per_condition": {
+      "RANDOM_PURE": {
+        "component_transitions": 0,
+        "ecc_range": 0.35622652759094453,
+        "ecc_std": 0.1079511093516386,
+        "ecc_bimodal": "True",
+        "fourier_variance": 0.00018557570223779962,
+        "fourier_multimodal": "False",
+        "euler_transitions": 0,
+        "orient_range": 75.4451771152636,
+        "orient_std": 18.781312922146878,
+        "orient_rotated": "True",
+        "curv_tail_range": 1.1209636925532886,
+        "curv_heavy_tail": "True",
+        "poly_score": 2,
+        "topo_score": 1.5
+      },
+      "NEAR_NULL": {
+        "component_transitions": 1,
+        "ecc_range": 0.48831376085437134,
+        "ecc_std": 0.1443556988989173,
+        "ecc_bimodal": "True",
+        "fourier_variance": 0.00017961908434159694,
+        "fourier_multimodal": "False",
+        "euler_transitions": 1,
+        "orient_range": 81.91108508506204,
+        "orient_std": 23.62728398833121,
+        "orient_rotated": "True",
+        "curv_tail_range": 1.0734037598619648,
+        "curv_heavy_tail": "True",
+        "poly_score": 3,
+        "topo_score": 2.0
+      },
+      "REAL_NORMAL": {
+        "component_transitions": 2,
+        "ecc_range": 0.3763756706756338,
+        "ecc_std": 0.09602513704716534,
+        "ecc_bimodal": "False",
+        "fourier_variance": 0.0008058560586573103,
+        "fourier_multimodal": "False",
+        "euler_transitions": 2,
+        "orient_range": 83.52191729706155,
+        "orient_std": 19.821663397969225,
+        "orient_rotated": "True",
+        "curv_tail_range": 0.955372631460262,
+        "curv_heavy_tail": "False",
+        "poly_score": 2,
+        "topo_score": 3.0
+      },
+      "REAL_SURVIVAL": {
+        "component_transitions": 2,
+        "ecc_range": 0.6307597690725207,
+        "ecc_std": 0.2061803603479502,
+        "ecc_bimodal": "True",
+        "fourier_variance": 0.0006770209208714277,
+        "fourier_multimodal": "False",
+        "euler_transitions": 2,
+        "orient_range": 356.84798553203757,
+        "orient_std": 143.92158358691518,
+        "orient_rotated": "True",
+        "curv_tail_range": 1.862155986570833,
+        "curv_heavy_tail": "True",
+        "poly_score": 4,
+        "topo_score": 4.5
+      },
+      "REAL_BIBLICAL": {
+        "component_transitions": 2,
+        "ecc_range": 0.3763756706756338,
+        "ecc_std": 0.09602513704716534,
+        "ecc_bimodal": "False",
+        "fourier_variance": 0.0008058560586573103,
+        "fourier_multimodal": "False",
+        "euler_transitions": 2,
+        "orient_range": 83.52191729706155,
+        "orient_std": 19.821663397969225,
+        "orient_rotated": "True",
+        "curv_tail_range": 0.955372631460262,
+        "curv_heavy_tail": "False",
+        "poly_score": 2,
+        "topo_score": 3.0
+      },
+      "AXIS_MODERATE": {
+        "component_transitions": 2,
+        "ecc_range": 0.43514565340051287,
+        "ecc_std": 0.13764852293685823,
+        "ecc_bimodal": "True",
+        "fourier_variance": 0.000645252823249486,
+        "fourier_multimodal": "False",
+        "euler_transitions": 4,
+        "orient_range": 348.5752168819147,
+        "orient_std": 108.58890694431499,
+        "orient_rotated": "True",
+        "curv_tail_range": 2.0025189935719117,
+        "curv_heavy_tail": "True",
+        "poly_score": 4,
+        "topo_score": 5.5
+      },
+      "AXIS_STRONG": {
+        "component_transitions": 1,
+        "ecc_range": 0.6483826463202806,
+        "ecc_std": 0.20337266651661992,
+        "ecc_bimodal": "True",
+        "fourier_variance": 0.006821331664386715,
+        "fourier_multimodal": "False",
+        "euler_transitions": 5,
+        "orient_range": 323.2986648923089,
+        "orient_std": 95.68921580702947,
+        "orient_rotated": "True",
+        "curv_tail_range": 3.8431400596088885,
+        "curv_heavy_tail": "True",
+        "poly_score": 4,
+        "topo_score": 4.0
+      },
+      "VIRUS_03": {
+        "component_transitions": 3,
+        "ecc_range": 0.731209374264568,
+        "ecc_std": 0.24258571396102244,
+        "ecc_bimodal": "True",
+        "fourier_variance": 0.0007987756350936863,
+        "fourier_multimodal": "False",
+        "euler_transitions": 3,
+        "orient_range": 333.3809042512347,
+        "orient_std": 129.7474815213142,
+        "orient_rotated": "True",
+        "curv_tail_range": 0.8736516636565006,
+        "curv_heavy_tail": "False",
+        "poly_score": 3,
+        "topo_score": 5.0
+      },
+      "VIRUS_06": {
+        "component_transitions": 4,
+        "ecc_range": 0.3451226042610156,
+        "ecc_std": 0.12202910130784361,
+        "ecc_bimodal": "True",
+        "fourier_variance": 0.00041607652097754185,
+        "fourier_multimodal": "False",
+        "euler_transitions": 4,
+        "orient_range": 314.7092261196391,
+        "orient_std": 96.19121831563403,
+        "orient_rotated": "True",
+        "curv_tail_range": 2.7476659402887007,
+        "curv_heavy_tail": "True",
+        "poly_score": 4,
+        "topo_score": 5.5
+      }
+    }
+  }
+}

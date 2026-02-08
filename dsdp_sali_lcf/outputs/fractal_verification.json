@@ -1,0 +1,121 @@
+{
+  "results": {
+    "fractal_time": {
+      "random_never": true,
+      "near_null_never": false,
+      "real_consistent": false
+    },
+    "fractal_space": {
+      "monotonic": true,
+      "identity_ok": true
+    },
+    "fractal_regime": {
+      "hierarchy_ok": true
+    }
+  },
+  "space_details": {
+    "RANDOM_PURE": {
+      "0.25": {
+        "align_drop": 0.00036426394760524783,
+        "identity": 0.9981656207861048
+      },
+      "0.5": {
+        "align_drop": -0.0684161657377915,
+        "identity": -0.05208238864274162
+      },
+      "1.0": {
+        "align_drop": -0.13516583562670345,
+        "identity": -0.09894306115863079
+      }
+    },
+    "NEAR_NULL": {
+      "0.25": {
+        "align_drop": 0.0016798574394185292,
+        "identity": 0.9380270391902328
+      },
+      "0.5": {
+        "align_drop": -0.06272600420099089,
+        "identity": -0.06352658340867663
+      },
+      "1.0": {
+        "align_drop": -0.1282900215515314,
+        "identity": -0.11910470265333307
+      }
+    },
+    "REAL_NORMAL": {
+      "0.25": {
+        "align_drop": 0.0357103233887192,
+        "identity": 0.9999990098450716
+      },
+      "0.5": {
+        "align_drop": 0.12137160193565653,
+        "identity": 0.9999958835015327
+      },
+      "1.0": {
+        "align_drop": 0.12137160193565653,
+        "identity": 0.9999821809931052
+      }
+    },
+    "REAL_SURVIVAL": {
+      "0.25": {
+        "align_drop": 0.041976497242931454,
+        "identity": 0.9999995374337923
+      },
+      "0.5": {
+        "align_drop": 0.12122003702937147,
+        "identity": 0.999998078932771
+      },
+      "1.0": {
+        "align_drop": 0.12122003702937147,
+        "identity": 0.9999917017610863
+      }
+    }
+  },
+  "regime_details": {
+    "2000": {
+      "RANDOM_PURE": {
+        "alignment": 0.046834111632655995,
+        "waves": 4,
+        "fsi": 0.01888037366840255
+      },
+      "NEAR_NULL": {
+        "alignment": 0.0456094140407381,
+        "waves": 3,
+        "fsi": 0.018403087308749427
+      },
+      "REAL_NORMAL": {
+        "alignment": 0.32177019248761585,
+        "waves": 20,
+        "fsi": 0.12881497694418106
+      },
+      "REAL_SURVIVAL": {
+        "alignment": 0.23751646340883084,
+        "waves": 6,
+        "fsi": 0.09512626696838641
+      }
+    },
+    "5000": {
+      "RANDOM_PURE": {
+        "alignment": 0.060900029181132576,
+        "waves": 2,
+        "fsi": 0.024422370706379728
+      },
+      "NEAR_NULL": {
+        "alignment": 0.0615391829984398,
+        "waves": 4,
+        "fsi": 0.024802090026523473
+      },
+      "REAL_NORMAL": {
+        "alignment": 0.12137160193565653,
+        "waves": 2,
+        "fsi": 0.04858199653157311
+      },
+      "REAL_SURVIVAL": {
+        "alignment": 0.12122003702937147,
+        "waves": 2,
+        "fsi": 0.04851994346158602
+      }
+    }
+  },
+  "all_pass": false
+}

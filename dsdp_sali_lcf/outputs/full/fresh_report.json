@@ -1,0 +1,232 @@
+{
+  "label": "fresh",
+  "source": "dsdp_sali_lcf/data/fresh_embeddings.npz",
+  "shape": [
+    5000,
+    64
+  ],
+  "lattice": {
+    "global_alignment": 0.05084302557928428,
+    "global_median_resid": 0.14126549276497546,
+    "per_magistral": [
+      {
+        "magistrale": 0,
+        "n_points": 799,
+        "alignment_rate": 0.05131414267834793,
+        "median_resid": 0.14519144634462178,
+        "switch_rate": 0.0,
+        "status": "ok"
+      },
+      {
+        "magistrale": 1,
+        "n_points": 827,
+        "alignment_rate": 0.0471584038694075,
+        "median_resid": 0.14116586799360187,
+        "switch_rate": 0.0,
+        "status": "ok"
+      },
+      {
+        "magistrale": 2,
+        "n_points": 864,
+        "alignment_rate": 0.059027777777777776,
+        "median_resid": 0.1396322871329707,
+        "switch_rate": 0.0,
+        "status": "ok"
+      },
+      {
+        "magistrale": 3,
+        "n_points": 808,
+        "alignment_rate": 0.05693069306930693,
+        "median_resid": 0.14429717594938407,
+        "switch_rate": 0.0,
+        "status": "ok"
+      },
+      {
+        "magistrale": 4,
+        "n_points": 845,
+        "alignment_rate": 0.05562130177514793,
+        "median_resid": 0.13761850766861938,
+        "switch_rate": 0.0,
+        "status": "ok"
+      },
+      {
+        "magistrale": 5,
+        "n_points": 857,
+        "alignment_rate": 0.03500583430571762,
+        "median_resid": 0.1423224140152568,
+        "switch_rate": 0.0,
+        "status": "ok"
+      }
+    ]
+  },
+  "predictions": {
+    "median_error": 0.0,
+    "n_valid": 6,
+    "details": [
+      {
+        "magistrale": 0,
+        "status": "ok",
+        "predicted_center": 2.4060591252980172,
+        "actual_center": 2.4060591252980172,
+        "error": 0.0,
+        "predicted_band_idx": 10.0,
+        "actual_band_idx": 10.0
+      },
+      {
+        "magistrale": 1,
+        "status": "ok",
+        "predicted_center": 2.4060591252980172,
+        "actual_center": 2.4060591252980172,
+        "error": 0.0,
+        "predicted_band_idx": 10.0,
+        "actual_band_idx": 10.0
+      },
+      {
+        "magistrale": 2,
+        "status": "ok",
+        "predicted_center": 2.4060591252980172,
+        "actual_center": 2.4060591252980172,
+        "error": 0.0,
+        "predicted_band_idx": 10.0,
+        "actual_band_idx": 10.0
+      },
+      {
+        "magistrale": 3,
+        "status": "ok",
+        "predicted_center": 2.4060591252980172,
+        "actual_center": 2.4060591252980172,
+        "error": 0.0,
+        "predicted_band_idx": 10.0,
+        "actual_band_idx": 10.0
+      },
+      {
+        "magistrale": 4,
+        "status": "ok",
+        "predicted_center": 2.646665037827819,
+        "actual_center": 2.646665037827819,
+        "error": 0.0,
+        "predicted_band_idx": 11.0,
+        "actual_band_idx": 11.0
+      },
+      {
+        "magistrale": 5,
+        "status": "ok",
+        "predicted_center": 2.646665037827819,
+        "actual_center": 2.646665037827819,
+        "error": 0.0,
+        "predicted_band_idx": 11.0,
+        "actual_band_idx": 11.0
+      }
+    ]
+  },
+  "temporal": {
+    "n_waves": 10,
+    "longest_wave": 3,
+    "mean_wave": 1.5
+  },
+  "null_suite": {
+    "uniform": {
+      "p_value": 1.0,
+      "z_score": -19.429325792476046,
+      "observed": 0.05084302557928428,
+      "null_mean": 0.15583994564058734,
+      "null_std": 0.005404043411662463,
+      "n_valid_surrogates": 50
+    },
+    "gaussian_cov": {
+      "p_value": 1.0,
+      "z_score": -5.56151118854167,
+      "observed": 0.05084302557928428,
+      "null_mean": 0.07048412104535322,
+      "null_std": 0.003531611246413348,
+      "n_valid_surrogates": 50
+    },
+    "spacing": {
+      "p_value": 1.0,
+      "z_score": -3.916178232609638,
+      "observed": 0.05084302557928428,
+      "null_mean": 0.11587251633215816,
+      "null_std": 0.016605345029361382,
+      "n_valid_surrogates": 50
+    },
+    "conservative_p": 1.0,
+    "min_z": -19.429325792476046,
+    "observed": 0.05084302557928428
+  },
+  "conservative_p": 1.0,
+  "fsi": {
+    "fsi": 0.020407600128395445,
+    "signal_rate_component": 0.020337210231713712,
+    "surprise_component": 0.0,
+    "entropy_component": 7.03898966817329e-05,
+    "raw_signal_rate": 0.05084302557928428,
+    "raw_surprise_z": -19.429325792476046,
+    "raw_clustering_entropy": 1.7913390633484967
+  },
+  "ablations": {
+    "seed": {
+      "real_score": 0.1944,
+      "max_decoy": 0.2428,
+      "advantage": -0.0484,
+      "seed_is_special": false
+    },
+    "coupler": {
+      "with": 0.05084302557928428,
+      "without": 0.1945061597013434,
+      "difference": -0.14366313412205914,
+      "matters": true
+    },
+    "anchor": {
+      "original": 0.05084302557928428,
+      "mean_random": 0.07086160421472817,
+      "advantage": -0.020018578635443894,
+      "stable": false
+    },
+    "temporal_order": {
+      "original_longest_wave": 3,
+      "shuffled_longest_wave": 4,
+      "matters": false
+    }
+  },
+  "perturbation": {
+    "alphas": [
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "scores": [
+      0.05084302557928428,
+      0.05051588909718252,
+      0.051199160981745984,
+      0.05204352319459655,
+      0.05317696677394567,
+      0.053971880606672205,
+      0.054958390100969555,
+      0.05664938935262131,
+      0.05746278920983016,
+      0.05800430094590114,
+      0.05800173879829245,
+      0.058982423357387716,
+      0.0604962215021829
+    ],
+    "tipping_alpha": 0.8
+  },
+  "split_half_stability": {
+    "mean": 0.08214460673840356,
+    "std": 0.04261764070540998,
+    "n_successful": 20,
+    "stable": false
+  },
+  "alignment": 0.05084302557928428,
+  "median_error": 0.0
+}

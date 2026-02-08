@@ -1,0 +1,29 @@
+{
+  "description": "SHA-256 hashes of raw embeddings for reproducibility verification",
+  "seed": 42,
+  "n_dim": 64,
+  "environment": {
+    "generated_at": "2026-02-08T11:40:00Z",
+    "git_commit": "e77d877ad02943e9378264e9cb24878655c1745f",
+    "python_version": "3.11.14",
+    "numpy_version": "2.4.2",
+    "scipy_version": "1.17.0",
+    "platform": "Linux-6.14.11-x86_64-with-glibc2.40"
+  },
+  "hashes": {
+    "5000": {
+      "RANDOM_PURE": "b806643f536e6ec50629a961acea21e62ab3ad17f04739c3252ba42bea46cd8f",
+      "NEAR_NULL": "0cab4a5a93173903383c600efde0be4f6c0df772cc397327b771f44e8b7d8962",
+      "REAL_NORMAL": "863db3d208a2f9e1030b8d35702b43ad8d407a31be84e05da3caf705102e146c",
+      "REAL_SURVIVAL": "b094ded23c7b6f98925f81941bbe5fadf862dd5a267f484e83b44fb46a0f2cef",
+      "REAL_BIBLICAL": "e0920e6f885bbe318d67ab6d035b87a52392e23d4923ba08d138dee31f9cb4a9"
+    },
+    "10000": {
+      "RANDOM_PURE": "d2d0536493b9e7ea2c48d459d5cce19b27db669a41c575a9fe28799dcd71c365",
+      "NEAR_NULL": "e9d57ec40a82d93b42948b0d110130735b7ff76837889a52e3bcb3292d0e5bff",
+      "REAL_NORMAL": "8d3c4cdeb398d650e4d7e4a1e8d3c2093a9001bc1f0abd7e15e076d7b0a3a222",
+      "REAL_SURVIVAL": "a5cf44905ad62a46775c44b47b0971c27abde5cf43ce5707886552ce62870e7e",
+      "REAL_BIBLICAL": "6778143ccb26db52b0c3193165db9111123ef4ab9ef6ba68a520f320843238be"
+    }
+  }
+}

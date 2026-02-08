@@ -1,0 +1,72 @@
+{
+  "pipeline": "DSDP_SALI_LCF_PHASE1",
+  "source": "dsdp_sali_lcf/data/fresh_embeddings.npz",
+  "n_points": 5000,
+  "n_dim": 64,
+  "H1_coherence_threshold": {
+    "status": "ok",
+    "metric_type": "residual_entropy (proxy for token entropy)",
+    "n_bins": 50,
+    "entropy_wave_lag1_correlation": -0.18611288209724516,
+    "entropy_wave_lag0_correlation": 0.305344896230959,
+    "entropy_alignment_lag1_correlation": -0.22929905488408067,
+    "optimal_lag": 2,
+    "optimal_correlation": -0.23169674720355948,
+    "permutation_test": {
+      "observed": -0.18611288209724516,
+      "null_mean": -0.004772607420302831,
+      "null_std": 0.1400506592146894,
+      "p_value": 0.092,
+      "z_score": -1.2948191439617829
+    },
+    "pass": "False",
+    "strong_pass": false,
+    "interpretation": "NOT CONFIRMED: No significant entropy-wave lag structure"
+  },
+  "H1_cross_correlation": {
+    "-5": 0.060969199561040834,
+    "-4": 0.07023839767259495,
+    "-3": 0.03279989776412655,
+    "-2": 0.12631686378699278,
+    "-1": 0.033295424026682896,
+    "0": 0.30534489623095895,
+    "1": -0.18611288209724527,
+    "2": -0.23169674720355948,
+    "3": -0.07877306522161263,
+    "4": -0.06407016753460404,
+    "5": 0.02679513206036618
+  },
+  "H2_peripheral_coupling": {
+    "identity_core_similarity": 0.9086965606189342,
+    "identity_peripheral_similarity": 0.13770657719734486,
+    "alignment_change_peripheral": 0.03801442738652027,
+    "alignment_change_core": 0.05496824355758422,
+    "wave_change_peripheral": 1.0,
+    "wave_change_core": 0.0,
+    "fsi_change_peripheral": 0.015173637943338501,
+    "fsi_change_core": 0.0223817860026626,
+    "total_impact_peripheral": 0.04560124635818952,
+    "total_impact_core": 0.06615913655891552,
+    "peripheral_has_more_impact": false,
+    "core_identity_preserved": true,
+    "pass": false,
+    "interpretation": "NOT CONFIRMED: Peripheral coupling hypothesis not supported"
+  },
+  "H5_intentional_abort": {
+    "wave_drop": 0.0,
+    "alignment_drop": -0.04597628352797987,
+    "fsi_drop": -0.018364049633923525,
+    "coupling_effect": -0.05148549841815692,
+    "identity_preserved_similarity": 0.0025893900568011332,
+    "coupling_dropped": false,
+    "identity_preserved": false,
+    "pass": false,
+    "interpretation": "PARTIAL: Coupling did not drop sufficiently"
+  },
+  "phase1_summary": {
+    "n_pass": "0",
+    "h1_pass": "False",
+    "h2_pass": false,
+    "h5_pass": false
+  }
+}

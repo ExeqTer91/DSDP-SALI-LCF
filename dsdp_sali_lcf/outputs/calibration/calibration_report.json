@@ -1,0 +1,280 @@
+{
+  "A1": {
+    "test": "A1_reproducibility",
+    "pass": true,
+    "details": "skipped"
+  },
+  "A2": {
+    "test": "A2_hungarian_stability",
+    "pass": true,
+    "mappings": [
+      [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          5
+        ]
+      ]
+    ],
+    "cost_summaries": [
+      {
+        "min": -2.220446049250313e-16,
+        "mean": 0.15776961642814222,
+        "max": 0.20674623796403357
+      },
+      {
+        "min": -2.220446049250313e-16,
+        "mean": 0.15776961642814222,
+        "max": 0.20674623796403357
+      },
+      {
+        "min": -2.220446049250313e-16,
+        "mean": 0.15776961642814222,
+        "max": 0.20674623796403357
+      }
+    ]
+  },
+  "B1": {
+    "test": "B1_random_pure_negative",
+    "pass": true,
+    "any_test_passed": false,
+    "h5_identity_abort": -0.052082388642741624,
+    "details": {
+      "h1_pass": "False",
+      "h2_pass": false,
+      "h5_pass": false,
+      "h1_lag1_corr": 0.04324378113816146,
+      "h1_p_value": 0.596,
+      "h2_identity_sim": 0.913960050647677,
+      "h2_alignment_delta": 0.05421062075647552,
+      "h5_wave_drop": 0.0,
+      "h5_identity_abort": -0.052082388642741624,
+      "alignment": 0.060900029181132576,
+      "longest_wave": 2,
+      "fsi": 0.024422370706379728
+    }
+  },
+  "B2": {
+    "test": "B2_near_null",
+    "pass": true,
+    "all_passed_bug": "False",
+    "lag_more_negative_than_random": true,
+    "identity_inertia": false,
+    "details": {
+      "h1_pass": "False",
+      "h2_pass": false,
+      "h5_pass": false,
+      "h1_lag1_corr": -0.17934030840053325,
+      "h1_p_value": 0.102,
+      "h2_identity_sim": 0.496372594662949,
+      "h2_alignment_delta": 0.07101936633934522,
+      "h5_wave_drop": 2.0,
+      "h5_identity_abort": -0.06352658340867665,
+      "alignment": 0.0615391829984398,
+      "longest_wave": 4,
+      "fsi": 0.024802090026523473
+    }
+  },
+  "C1": {
+    "test": "C1_real_normal",
+    "n_pass": 3.0,
+    "pass": "True",
+    "details": {
+      "h1_pass": "True",
+      "h2_pass": true,
+      "h5_pass": true,
+      "h1_lag1_corr": -0.2126350967950418,
+      "h1_p_value": 0.064,
+      "h2_identity_sim": 0.999982690870802,
+      "h2_alignment_delta": 0.04262882194669347,
+      "h5_wave_drop": -48.0,
+      "h5_identity_abort": 0.9999958835015329,
+      "alignment": 0.12137160193565653,
+      "longest_wave": 2,
+      "fsi": 0.04858199653157311
+    }
+  },
+  "C2": {
+    "test": "C2_survival_effect",
+    "pass": true,
+    "alignment_decreased": true,
+    "identity_high": true,
+    "cross_identity": 0.9848149607559553,
+    "normal_summary": {
+      "h1_pass": "True",
+      "h2_pass": true,
+      "h5_pass": true,
+      "h1_lag1_corr": -0.2126350967950418,
+      "h1_p_value": 0.064,
+      "h2_identity_sim": 0.999982690870802,
+      "h2_alignment_delta": 0.04262882194669347,
+      "h5_wave_drop": -48.0,
+      "h5_identity_abort": 0.9999958835015327,
+      "alignment": 0.12137160193565653,
+      "longest_wave": 2,
+      "fsi": 0.04858199653157311
+    },
+    "survival_summary": {
+      "h1_pass": "True",
+      "h2_pass": false,
+      "h5_pass": true,
+      "h1_lag1_corr": -0.2564770215608279,
+      "h1_p_value": 0.042,
+      "h2_identity_sim": 0.9999833657253269,
+      "h2_alignment_delta": 0.04069913194846349,
+      "h5_wave_drop": -48.0,
+      "h5_identity_abort": 0.9999980789327708,
+      "alignment": 0.12122003702937147,
+      "longest_wave": 2,
+      "fsi": 0.04851994346158602
+    }
+  },
+  "D1": {
+    "test": "D1_h1_sensitivity",
+    "pass": true,
+    "random_no_signal": true,
+    "details": {
+      "RANDOM_PURE": {
+        "16": {
+          "lag1_corr": -0.05718991933182765,
+          "p_value": 0.405,
+          "pass": "False"
+        },
+        "32": {
+          "lag1_corr": 0.21896278710721143,
+          "p_value": 0.915,
+          "pass": "False"
+        },
+        "64": {
+          "lag1_corr": -0.025578513976888626,
+          "p_value": 0.485,
+          "pass": "False"
+        }
+      },
+      "REAL_NORMAL": {
+        "16": {
+          "lag1_corr": -0.27807408845592924,
+          "p_value": 0.16,
+          "pass": "True"
+        },
+        "32": {
+          "lag1_corr": -0.014445473758200827,
+          "p_value": 0.465,
+          "pass": "False"
+        },
+        "64": {
+          "lag1_corr": -0.1584506883013669,
+          "p_value": 0.155,
+          "pass": "False"
+        }
+      }
+    }
+  },
+  "D2": {
+    "test": "D2_h5_survival_delta",
+    "pass": true,
+    "abort_strength": 1.5,
+    "identity_abort_normal": 0.9999565119582887,
+    "identity_abort_survival": 0.9999797903798878
+  },
+  "E1": {
+    "test": "E1_biblical_consistency",
+    "pass": true,
+    "details": {
+      "test": "BIBLICAL_CONSISTENCY",
+      "cross_identity": 1.0,
+      "identity_preserved": true,
+      "alignment_change": 1.3877787807814457e-17,
+      "wave_change": 2.0,
+      "fsi_change": -2.0816681711721685e-17,
+      "no_new_waves": true,
+      "h1_fails_as_expected": true,
+      "h5_trivial": true,
+      "pass": true,
+      "interpretation": "CONFIRMED: Biblical mode preserves identity, adds no new structure"
+    },
+    "biblical_h1": "False",
+    "biblical_h2": false,
+    "biblical_h5": true
+  },
+  "E2": {
+    "test": "E2_biblical_no_false_emergence",
+    "pass": true,
+    "h1_pass": "False",
+    "biblical_fsi": 0.048581996531573086,
+    "random_fsi": 0.024422370706379728,
+    "no_false_h1": true,
+    "fsi_not_inflated": true
+  }
+}

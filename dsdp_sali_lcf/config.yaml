@@ -1,0 +1,20 @@
+random_seed: 42
+max_points: 50000
+n_magistrales: 6
+phi: 1.6180339887498949
+sqrt_phi: 1.2720196495140689
+coupler_threshold_log: 0.8109302162163288  # log(2.25)
+switching_penalty: 0.1
+tau: 0.03
+eps: 1e-12
+n_surrogates_calib: 50
+n_surrogates_full: 500
+n_splits_stability: 20
+decoy_seeds: [1.70, 2.10, 2.60]
+perturbation_alphas: [0.0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+wave_quantile_threshold: 0.75
+fsi_weights:
+  signal_rate: 0.4
+  surprise_z: 0.3
+  clustering_entropy: 0.3
+calibration_mode: true

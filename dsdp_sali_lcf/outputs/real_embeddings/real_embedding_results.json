@@ -1,0 +1,172 @@
+{
+  "metadata": {
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_type": "BERT-based (6-layer MiniLM)",
+    "embedding_dim": 384,
+    "n_sentences": 5000,
+    "n_base_sentences": 102,
+    "seed": 42,
+    "tau": 0.03,
+    "n_magistrales": 6,
+    "elapsed_seconds": 64.77656555175781
+  },
+  "pipeline": {
+    "BERT_REAL": {
+      "label": "BERT_REAL",
+      "n_points": 5000,
+      "n_dim": 384,
+      "alignment": 0.21809846371657637,
+      "longest_wave": 6,
+      "fsi": 0.11303908221958864,
+      "coupling": 0.3011511101525072,
+      "h1_lag1_corr": 0.2641925947692002,
+      "h1_p_value": 0.976,
+      "h1_pass": "False",
+      "h1_optimal_lag": -1,
+      "h1_optimal_corr": -0.1468407283187095
+    },
+    "BERT_SHUFFLED": {
+      "label": "BERT_SHUFFLED",
+      "n_points": 5000,
+      "n_dim": 384,
+      "alignment": 0.20992364930147245,
+      "longest_wave": 2,
+      "fsi": 0.10614460523115321,
+      "coupling": 0.17581284128993496,
+      "h1_lag1_corr": 0.08185535875519903,
+      "h1_p_value": 0.676,
+      "h1_pass": "False",
+      "h1_optimal_lag": 2,
+      "h1_optimal_corr": -0.23335601326734934
+    },
+    "RANDOM_384": {
+      "label": "RANDOM_384",
+      "n_points": 5000,
+      "n_dim": 384,
+      "alignment": 0.0,
+      "longest_wave": 2,
+      "fsi": 0.0005861705657085325,
+      "coupling": 0.06017585116971256,
+      "h1_lag1_corr": 0.07910417478438236,
+      "h1_p_value": 0.694,
+      "h1_pass": "False",
+      "h1_optimal_lag": 0,
+      "h1_optimal_corr": -0.30453261309782614
+    },
+    "GAUSSIAN_MATCHED": {
+      "label": "GAUSSIAN_MATCHED",
+      "n_points": 5000,
+      "n_dim": 384,
+      "alignment": 0.0,
+      "longest_wave": 2,
+      "fsi": 6.922417433284922e-05,
+      "coupling": 0.06002076725229985,
+      "h1_lag1_corr": 0.22833505102603383,
+      "h1_p_value": 0.942,
+      "h1_pass": "False",
+      "h1_optimal_lag": -5,
+      "h1_optimal_corr": -0.24900546627616602
+    }
+  },
+  "topology": {
+    "BERT_REAL": {
+      "label": "BERT_REAL",
+      "component_counts": [
+        5,
+        1,
+        1,
+        1,
+        1
+      ],
+      "component_transitions": 1,
+      "euler_chars": [
+        5,
+        1,
+        0,
+        -1,
+        -2
+      ],
+      "euler_transitions": 4,
+      "topo_score": 3.0
+    },
+    "BERT_SHUFFLED": {
+      "label": "BERT_SHUFFLED",
+      "component_counts": [
+        5,
+        1,
+        1,
+        1,
+        1
+      ],
+      "component_transitions": 1,
+      "euler_chars": [
+        5,
+        1,
+        0,
+        -1,
+        -2
+      ],
+      "euler_transitions": 4,
+      "topo_score": 3.0
+    },
+    "RANDOM_384": {
+      "label": "RANDOM_384",
+      "component_counts": [
+        11,
+        4,
+        3,
+        1,
+        2
+      ],
+      "component_transitions": 4,
+      "euler_chars": [
+        10,
+        3,
+        2,
+        1,
+        2
+      ],
+      "euler_transitions": 4,
+      "topo_score": 6.0
+    },
+    "GAUSSIAN_MATCHED": {
+      "label": "GAUSSIAN_MATCHED",
+      "component_counts": [
+        7,
+        8,
+        4,
+        1,
+        1
+      ],
+      "component_transitions": 3,
+      "euler_chars": [
+        4,
+        7,
+        4,
+        1,
+        1
+      ],
+      "euler_transitions": 3,
+      "topo_score": 4.5
+    }
+  },
+  "abort_test": {
+    "label": "BERT_REAL",
+    "pre_alignment": 0.21809846371657637,
+    "post_alignment": 0.2333121181504919,
+    "alignment_drop": -0.015213654433915536,
+    "fsi_drop": -0.01747248442916899,
+    "identity_after_abort": 0.8770946661631266,
+    "coupling_dropped": false,
+    "identity_preserved": true
+  },
+  "key_findings": {
+    "topo_separation_real_vs_random": -3.0,
+    "topo_separation_real_vs_shuffled": 0.0,
+    "alignment_ratio": 218098463716.5764,
+    "h1_real_pass": "False",
+    "h1_random_pass": "False",
+    "abort_coupling_dropped": false,
+    "abort_identity_preserved": true
+  }
+}
