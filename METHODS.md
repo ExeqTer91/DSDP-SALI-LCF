@@ -751,24 +751,31 @@ the purely null sentence-level experiment (Section 9):
    random to trained, confirming that training creates local geometric structure
    in the token flow that is absent at initialization.
 
-2. **The sentence-level null result (Section 9) is explained**: mean-pooling per
-   sentence destroys the token-level micro-climate structure. The "time" axis for
-   autoregressive models is token position within a context window, not sentence
-   index across a corpus.
+2. **The sentence-level null result (Section 9) is plausibly explained by
+   granularity mismatch**: mean-pooling per sentence may destroy the token-level
+   micro-climate structure. The "time" axis for autoregressive models is token
+   position within a context window, not sentence index across a corpus. A direct
+   causal test (e.g., varying pooling granularity on the same data) would be
+   needed to confirm this explanation.
 
-3. **Middle layers are the locus of micro-climate structure**, not the deepest
-   layers. This is consistent with the view that intermediate transformer layers
+3. **In this experiment, middle layers show the strongest micro-climate signal**,
+   not the deepest layers. This suggests that intermediate transformer layers
    perform contextual integration while later layers specialize for the output
-   vocabulary.
+   vocabulary, though this finding is from a single model and sequence.
 
 4. **topo_sep and alignment remain null**, suggesting these metrics require
    contrastive/similarity training to produce detectable signal, regardless of
    granularity.
 
 5. **The negative r1 at Layer 3 is noteworthy**: anti-correlation between adjacent
-   token windows suggests the trained model creates an alternating pattern of
-   geometric density — a "breathing" micro-climate structure — rather than smooth
-   gradients.
+   token windows indicates that the geometric distance signal alternates rather
+   than varying smoothly. The mechanism behind this anti-correlation pattern
+   remains to be investigated; it may reflect alternating representational regimes
+   but this interpretation requires further validation.
+
+**Note**: These results are from a single deterministic text corpus and single
+random seed. Replication across diverse sequences and seeds would strengthen the
+claims made here.
 
 **Script**: `experiments/pythia_microclimate.py`
 **Results**: `outputs/pythia_microclimate/pythia_microclimate_results.json`
