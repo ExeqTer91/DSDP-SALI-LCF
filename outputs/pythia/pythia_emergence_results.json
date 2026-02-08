@@ -1,0 +1,339 @@
+{
+  "config": {
+    "model_name": "EleutherAI/pythia-70m",
+    "checkpoints": [
+      0,
+      1,
+      2,
+      8,
+      32,
+      128,
+      512,
+      1000,
+      2000,
+      4000,
+      8000,
+      16000,
+      32000,
+      64000,
+      143000
+    ],
+    "extract_layer": 3,
+    "n_sentences": 2000,
+    "h1_window": 32,
+    "h1_n_shuffles": 500,
+    "h1_r1_threshold": 0.2,
+    "h1_p_threshold": 0.05,
+    "n_pca_dims": 10,
+    "n_tau_steps": 20,
+    "output_dir": "/home/runner/workspace/dsdp_sali_lcf/outputs/pythia",
+    "seed": 42
+  },
+  "checkpoints": {
+    "0": {
+      "step": 0,
+      "h1": {
+        "r1": -0.21431967440485614,
+        "p": 0.014,
+        "pass": true,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.25,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 33.3
+    },
+    "1": {
+      "step": 1,
+      "h1": {
+        "r1": -0.21431967440485614,
+        "p": 0.014,
+        "pass": true,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.25,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 26.3
+    },
+    "2": {
+      "step": 2,
+      "h1": {
+        "r1": -0.21358953676875153,
+        "p": 0.016,
+        "pass": true,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.25,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 35.0
+    },
+    "8": {
+      "step": 8,
+      "h1": {
+        "r1": -0.21038099376635494,
+        "p": 0.02,
+        "pass": true,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.05,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 24.0
+    },
+    "32": {
+      "step": 32,
+      "h1": {
+        "r1": -0.10336372816313753,
+        "p": 0.276,
+        "pass": false,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.15,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 24.1
+    },
+    "128": {
+      "step": 128,
+      "h1": {
+        "r1": -0.0643522359984365,
+        "p": 0.508,
+        "pass": false,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.25,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 33.6
+    },
+    "512": {
+      "step": 512,
+      "h1": {
+        "r1": -0.434153471630225,
+        "p": 0.0,
+        "pass": true,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.25,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 23.4
+    },
+    "1000": {
+      "step": 1000,
+      "h1": {
+        "r1": -0.22835596415629641,
+        "p": 0.014,
+        "pass": true,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.15,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 23.7
+    },
+    "2000": {
+      "step": 2000,
+      "h1": {
+        "r1": -0.051270761711335745,
+        "p": 0.566,
+        "pass": false,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.25,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 23.2
+    },
+    "4000": {
+      "step": 4000,
+      "h1": {
+        "r1": 0.11886735583251905,
+        "p": 0.222,
+        "pass": false,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.15,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 33.7
+    },
+    "8000": {
+      "step": 8000,
+      "h1": {
+        "r1": -0.7469128882721152,
+        "p": 0.0,
+        "pass": true,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.2,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 23.5
+    },
+    "16000": {
+      "step": 16000,
+      "h1": {
+        "r1": 0.17739769439952233,
+        "p": 0.058,
+        "pass": false,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.15,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 23.4
+    },
+    "32000": {
+      "step": 32000,
+      "h1": {
+        "r1": 0.06967624678854073,
+        "p": 0.464,
+        "pass": false,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.15,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 23.9
+    },
+    "64000": {
+      "step": 64000,
+      "h1": {
+        "r1": 0.305415100582344,
+        "p": 0.0,
+        "pass": true,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.2,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 35.2
+    },
+    "143000": {
+      "step": 143000,
+      "h1": {
+        "r1": -0.2726327248559887,
+        "p": 0.0,
+        "pass": true,
+        "n_windows": 123
+      },
+      "topo_sep": {
+        "topo_sep": 0.0,
+        "transitions_real": 0,
+        "transitions_random": 0
+      },
+      "alignment": 0.15,
+      "embedding_shape": [
+        2000,
+        512
+      ],
+      "elapsed_seconds": 24.4
+    }
+  },
+  "predictions": {
+    "H1": "H1 should transition from FAIL to PASS as training progresses (temporal coherence emerges)",
+    "topo_sep": "topo_sep should increase monotonically (topological complexity increases with constraint tightening)",
+    "alignment": "alignment should increase (learned representations increasingly exhibit lattice-compatible geometry)"
+  }
+}
