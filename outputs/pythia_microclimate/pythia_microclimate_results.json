@@ -1,0 +1,409 @@
+{
+  "experiment": "pythia_microclimate",
+  "hypothesis": "Autoregressive models create LOCAL structure (micro-climates) detectable at token-level granularity but destroyed by sentence-level pooling.",
+  "predictions": {
+    "trained_vs_random": "Trained model shows H1 PASS and positive topo_sep at token level; random model shows H1 FAIL and near-zero topo_sep",
+    "layer_gradient": "Deeper layers show stronger emergence metrics (more accumulated constraints)",
+    "window_effect": "Intermediate window sizes (8-16 tokens) may capture micro-climate structure that single-token and large-window extraction miss"
+  },
+  "config": {
+    "model_name": "EleutherAI/pythia-70m",
+    "checkpoints": [
+      0,
+      143000
+    ],
+    "layers": [
+      1,
+      3,
+      5
+    ],
+    "seq_length": 1024,
+    "window_sizes": [
+      8,
+      16,
+      32
+    ],
+    "h1_window": 32,
+    "h1_n_shuffles": 1000,
+    "h1_r1_threshold": 0.2,
+    "h1_p_threshold": 0.05,
+    "n_pca_dims": 10,
+    "n_tau_steps": 50,
+    "output_dir": "outputs/pythia_microclimate",
+    "seed": 42
+  },
+  "checkpoints": {
+    "0": {
+      "step": 0,
+      "seq_length": 1024,
+      "analyses": {
+        "1": {
+          "raw_tokens": {
+            "h1": {
+              "r1": 0.2556887937306767,
+              "p": 0.039,
+              "pass": true,
+              "n_windows": 62
+            },
+            "topo_sep": {
+              "topo_sep": 0.0,
+              "transitions_real": 0,
+              "transitions_random": 0
+            },
+            "alignment": 0.208984375
+          },
+          "windowed": {
+            "8": {
+              "h1": {
+                "r1": 0.2976070879189222,
+                "p": 0.223,
+                "pass": false,
+                "n_windows": 14
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.13333333333333333
+            },
+            "16": {
+              "h1": {
+                "r1": 0.0,
+                "p": 1.0,
+                "pass": false,
+                "reason": "insufficient_windows"
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.13385826771653545
+            },
+            "32": {
+              "h1": {
+                "r1": 0.0,
+                "p": 1.0,
+                "pass": false,
+                "reason": "insufficient_data"
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.1111111111111111
+            }
+          }
+        },
+        "3": {
+          "raw_tokens": {
+            "h1": {
+              "r1": 0.17505794351101667,
+              "p": 0.161,
+              "pass": false,
+              "n_windows": 62
+            },
+            "topo_sep": {
+              "topo_sep": 0.0,
+              "transitions_real": 0,
+              "transitions_random": 0
+            },
+            "alignment": 0.16015625
+          },
+          "windowed": {
+            "8": {
+              "h1": {
+                "r1": 0.3028188450499884,
+                "p": 0.177,
+                "pass": false,
+                "n_windows": 14
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.17647058823529413
+            },
+            "16": {
+              "h1": {
+                "r1": 0.0,
+                "p": 1.0,
+                "pass": false,
+                "reason": "insufficient_windows"
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.13385826771653545
+            },
+            "32": {
+              "h1": {
+                "r1": 0.0,
+                "p": 1.0,
+                "pass": false,
+                "reason": "insufficient_data"
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.12698412698412698
+            }
+          }
+        },
+        "5": {
+          "raw_tokens": {
+            "h1": {
+              "r1": 0.16427431036993867,
+              "p": 0.188,
+              "pass": false,
+              "n_windows": 62
+            },
+            "topo_sep": {
+              "topo_sep": 0.0,
+              "transitions_real": 0,
+              "transitions_random": 0
+            },
+            "alignment": 0.1806640625
+          },
+          "windowed": {
+            "8": {
+              "h1": {
+                "r1": 0.12815032231673204,
+                "p": 0.498,
+                "pass": false,
+                "n_windows": 14
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.14901960784313725
+            },
+            "16": {
+              "h1": {
+                "r1": 0.0,
+                "p": 1.0,
+                "pass": false,
+                "reason": "insufficient_windows"
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.16535433070866143
+            },
+            "32": {
+              "h1": {
+                "r1": 0.0,
+                "p": 1.0,
+                "pass": false,
+                "reason": "insufficient_data"
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.1746031746031746
+            }
+          }
+        }
+      }
+    },
+    "143000": {
+      "step": 143000,
+      "seq_length": 1024,
+      "analyses": {
+        "1": {
+          "raw_tokens": {
+            "h1": {
+              "r1": 0.6651764318869735,
+              "p": 0.0,
+              "pass": true,
+              "n_windows": 62
+            },
+            "topo_sep": {
+              "topo_sep": 0.0,
+              "transitions_real": 0,
+              "transitions_random": 0
+            },
+            "alignment": 0.1591796875
+          },
+          "windowed": {
+            "8": {
+              "h1": {
+                "r1": 0.31357950245707583,
+                "p": 0.268,
+                "pass": false,
+                "n_windows": 14
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.17647058823529413
+            },
+            "16": {
+              "h1": {
+                "r1": 0.0,
+                "p": 1.0,
+                "pass": false,
+                "reason": "insufficient_windows"
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.1889763779527559
+            },
+            "32": {
+              "h1": {
+                "r1": 0.0,
+                "p": 1.0,
+                "pass": false,
+                "reason": "insufficient_data"
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.15873015873015872
+            }
+          }
+        },
+        "3": {
+          "raw_tokens": {
+            "h1": {
+              "r1": -0.27265557838337645,
+              "p": 0.002,
+              "pass": true,
+              "n_windows": 62
+            },
+            "topo_sep": {
+              "topo_sep": 0.0,
+              "transitions_real": 0,
+              "transitions_random": 0
+            },
+            "alignment": 0.1806640625
+          },
+          "windowed": {
+            "8": {
+              "h1": {
+                "r1": -0.42172187577252535,
+                "p": 0.023,
+                "pass": true,
+                "n_windows": 14
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.18823529411764706
+            },
+            "16": {
+              "h1": {
+                "r1": 0.0,
+                "p": 1.0,
+                "pass": false,
+                "reason": "insufficient_windows"
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.18110236220472442
+            },
+            "32": {
+              "h1": {
+                "r1": 0.0,
+                "p": 1.0,
+                "pass": false,
+                "reason": "insufficient_data"
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.14285714285714285
+            }
+          }
+        },
+        "5": {
+          "raw_tokens": {
+            "h1": {
+              "r1": -0.020540654220547388,
+              "p": 0.807,
+              "pass": false,
+              "n_windows": 62
+            },
+            "topo_sep": {
+              "topo_sep": 0.0,
+              "transitions_real": 0,
+              "transitions_random": 0
+            },
+            "alignment": 0.15625
+          },
+          "windowed": {
+            "8": {
+              "h1": {
+                "r1": 0.34986361361607454,
+                "p": 0.188,
+                "pass": false,
+                "n_windows": 14
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.16862745098039217
+            },
+            "16": {
+              "h1": {
+                "r1": 0.0,
+                "p": 1.0,
+                "pass": false,
+                "reason": "insufficient_windows"
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.2440944881889764
+            },
+            "32": {
+              "h1": {
+                "r1": 0.0,
+                "p": 1.0,
+                "pass": false,
+                "reason": "insufficient_data"
+              },
+              "topo_sep": {
+                "topo_sep": 0.0,
+                "transitions_real": 0,
+                "transitions_random": 0
+              },
+              "alignment": 0.12698412698412698
+            }
+          }
+        }
+      }
+    }
+  }
+}
